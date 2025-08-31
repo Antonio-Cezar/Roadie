@@ -25,7 +25,6 @@ These are the **sources of information** that Roadie uses either to display data
 
 
 # GUI Mockup
---image-- (Later)
 
 ### Layout  
 - **Front page**: warnings (2/3), quick access buttons (1/3)  
@@ -33,6 +32,10 @@ These are the **sources of information** that Roadie uses either to display data
   - Button 1: Register control & switch  
   - Button 2: Menu  
 
+--image-- (Later)
+
 
 # GUI functions
+
+
 --image-- (Later)
