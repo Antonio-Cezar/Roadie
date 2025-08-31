@@ -20,6 +20,9 @@ These are the **sources of information** that Roadie uses either to display data
 - **Politikontroller app** – integration for reading and writing police control data.  
 - **Algorithm** – calculates the chance of being controlled based on driving and external factors.  
 
+### Logs for Future Development  
+- Camera detection logs
+
 # GUI Mockup
 --image-- (Later)
 
@@ -28,6 +31,3 @@ These are the **sources of information** that Roadie uses either to display data
 - **Quick access buttons**:  
   - Button 1: Register control & switch  
   - Button 2: Menu  
-
-### Logs for Future Development  
-- Camera detection logs
