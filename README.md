@@ -20,7 +20,7 @@ These are the **sources of information** that Roadie uses either to display data
 - **Politikontroller app** – integration for reading and writing police control data.  
 - **Algorithm** – calculates the chance of being controlled based on driving and external factors.  
 
-### GUI Mockup
+# GUI Mockup
 --image-- (Later)
 
 ### Layout  
