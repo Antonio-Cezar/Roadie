@@ -32,10 +32,11 @@ These are the **sources of information** that Roadie uses either to display data
   - Button 1: Register control & switch  
   - Button 2: Menu  
 
---image-- (Later)
+![Main page](/System%20engineering/GUI%20Mockup/Screen%20layout-Main-page.jpg)
+
 
 
 # GUI functions
 
 
---image-- (Later)
+![Button functions](/System%20engineering/GUI%20Mockup/Screen%20layout-Button%20functions.jpg)
