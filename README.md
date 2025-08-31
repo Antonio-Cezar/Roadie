@@ -23,6 +23,7 @@ These are the **sources of information** that Roadie uses either to display data
 ### Logs for Future Development  
 - Camera detection logs
 
+
 # GUI Mockup
 --image-- (Later)
 
@@ -31,3 +32,7 @@ These are the **sources of information** that Roadie uses either to display data
 - **Quick access buttons**:  
   - Button 1: Register control & switch  
   - Button 2: Menu  
+
+
+# GUI functions
+--image-- (Later)
