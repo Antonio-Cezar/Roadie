@@ -6,17 +6,22 @@ It runs on a Raspberry Pi 5 connected to a camera and small display, making it a
 
 ## 📋 Project Specification  
 
-### Detections  
-- **Priority 1**: Police control  
-- **Priority 2**: Obstacles (animals, humans, road cracks)  
-- **Priority 3**: Road signs  
+### Priorities of detection alerts  
+The system will always display the highest-priority event currently detected.  
+- **Priority 1**: Obstacles (animals, humans, road cracks)  
+- **Priority 2**: Police control 
+- **Priority 3**: Road signs
 
 ### Info Gathering  
-- Google Maps  
-- Dashboard camera  
-- AI libraries  
-- Politikontroller app (read & write)  
-- Algorithm (chance of being controlled on the road)  
+These are the **sources of information** that Roadie uses either to display data on the GUI or to improve detection and decision-making:  
+- **Google Maps** – provides map data and location context.  
+- **Dashboard camera** – real-time video input for object detection.  
+- **AI libraries** – models and frameworks used for detecting objects and signs.  
+- **Politikontroller app** – integration for reading and writing police control data.  
+- **Algorithm** – calculates the chance of being controlled based on driving and external factors.  
+
+### GUI Mockup
+--image-- (Later)
 
 ### Layout  
 - **Front page**: warnings (2/3), quick access buttons (1/3)  
@@ -25,10 +30,4 @@ It runs on a Raspberry Pi 5 connected to a camera and small display, making it a
   - Button 2: Menu  
 
 ### Logs for Future Development  
-- Camera detection logs  
-
-### Device Tools  
-- Remote access  
-- SSH  
-- Git  
-
+- Camera detection logs
