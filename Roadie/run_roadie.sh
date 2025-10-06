@@ -5,7 +5,7 @@ set -euo pipefail
 
 # ---- Config (change if your paths differ) ----
 PROJECT_NAME="Roadie"
-ENTRY_PY="Roadie/main.py"   # your main Python launcher
+ENTRY_PY="/main.py"   # your main Python launcher
 VENV_DIR=".venv"            # local virtual env directory
 PYTHON_BIN="${PYTHON_BIN:-python3}"
 PIP_OPTS="${PIP_OPTS:-}"

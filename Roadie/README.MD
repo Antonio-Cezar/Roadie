@@ -1,3 +1,17 @@
+==================================
 How to run the GUI on linux:
+==================================
 
-Only run automated script: (run_roadie.sh):
+
+!==================================!
+First change to execute 
+
+"chmod +x run_roadie.sh"
+!==================================!
+
+
+!==================================!
+Only run automated script: 
+
+"./run_roadie.sh"
+!==================================!
