@@ -88,7 +88,7 @@ Window {
             }
 
             // Small spacer
-            Item { width: 1; height: 2 }
+            Item { width: 0.5; height: 0.5 }
 
             RoundButton {
                 id: registerBtn
