@@ -15,6 +15,7 @@ Completed Phases
 
 #### -
 Current & Upcoming Phases:
+
 4. GUI Development – building the first working interface on the Raspberry Pi 5 display.
 #### -
 
