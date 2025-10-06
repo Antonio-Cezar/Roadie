@@ -9,14 +9,6 @@ Window {
     height: 480
     visibility: Window.FullScreen
 
-    // White frame to verify scaling on device edges
-    Rectangle {
-        anchors.fill: parent
-        color: "transparent"
-        border.color: "white"
-        border.width: 3
-    }
-
     Row {
         id: mainRow
         anchors.fill: parent
