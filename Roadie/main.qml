@@ -75,7 +75,7 @@ Window {
         Column {
             id: sideBar
             spacing: 10
-            width: 150
+            width: 160
             anchors.top: parent.top
             anchors.bottom: parent.bottom
 
