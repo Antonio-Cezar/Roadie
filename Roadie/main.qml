@@ -14,9 +14,9 @@ Window {
         anchors.fill: parent
         // Deep blue gradient background
         gradient: Gradient {
-            GradientStop { position: 0.0; color: "#0A1A3F" }   // navy
-            GradientStop { position: 0.5; color: "#3b15a5ff" }   // mid-blue
-            GradientStop { position: 1.0; color: "#0A0F1F" }   // near-black
+            GradientStop { position: 0.0; color: "#0A1A3F" }
+            GradientStop { position: 0.5; color: "#ff4800ff" }
+            GradientStop { position: 1.0; color: "#0A0F1F" }
         }
 
         // Soft shadow overlay for depth
