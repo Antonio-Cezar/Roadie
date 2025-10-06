@@ -4,7 +4,7 @@ import QtQuick.Window 2.15
 Window {
     id: root
     visible: true
-    color: "#1E90FF"
+    color: "black"
     width: 800
     height: 480
     visibility: Window.FullScreen
@@ -78,7 +78,6 @@ Window {
                 onClicked: console.log("wifiBtn clicked")
             }
 
-            // Small spacer
             Item { width: 0.5; height: 0.5 }
 
             RoundButton {
@@ -104,8 +103,8 @@ Window {
     Rectangle {
         id: menuPopup
         visible: false
-        width: 400
-        height: 300
+        width: 500
+        height: 180
         radius: 10
         color: "black"
         border.color: "white"
@@ -113,9 +112,19 @@ Window {
         anchors.centerIn: parent
         z: 999
 
-        Column {
+        // White frame for clarity
+        Rectangle {
+            anchors.fill: parent
+            color: "transparent"
+            border.color: "white"
+            border.width: 2
+            radius: 10
+        }
+
+        // Row of 3 circular buttons
+        Row {
             anchors.centerIn: parent
-            spacing: 20
+            spacing: 30
 
             RoundButton {
                 text: "Option 1"
@@ -134,16 +143,16 @@ Window {
                 size: 100
                 onClicked: {
                     console.log("Exit clicked")
-                    Qt.quit()   // closes the whole app
+                    Qt.quit() // this exits the entire GUI app
                 }
             }
         }
 
-        // Dismiss popup when clicking outside (optional)
+        // Optional: click outside popup to close it
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                // Only close if clicked outside the central buttons
+                // If clicked outside the row of buttons, close popup
                 if (!childAt(mouse.x, mouse.y)) {
                     menuPopup.visible = false
                 }
@@ -152,11 +161,9 @@ Window {
     }
 
     // ================== Components ==================
-
-    // Forward warning panel: switchable "cases" via `mode`
     component ForwardWarningPanel: Rectangle {
         id: panel
-        property string mode: "idle"   // "idle" | "warning" | "error"
+        property string mode: "idle"
         property color borderColor: "white"
         property int borderWidth: 2
         radius: 0
@@ -214,7 +221,6 @@ Window {
         }
     }
 
-    // Rectangular button
     component RectButton: Rectangle {
         id: rectBtn
         property alias text: label.text
@@ -236,7 +242,6 @@ Window {
         MouseArea { anchors.fill: parent; onClicked: rectBtn.clicked() }
     }
 
-    // Round button
     component RoundButton: Rectangle {
         id: roundBtn
         property alias text: label.text
@@ -262,7 +267,6 @@ Window {
         MouseArea { anchors.fill: parent; onClicked: roundBtn.clicked() }
     }
 
-    // Info tile
     component InfoTile: Rectangle {
         id: tile
         property string title: ""
