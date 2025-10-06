@@ -6,10 +6,15 @@ Window {
     visible: true
     color: "black"
 
-    // for your 800x480 device (fullscreen will override size)
     width: 800
     height: 480
 
-    // open fullscreen
     visibility: Window.FullScreen
+    
+    Rectangle {
+        anchors.fill: parent
+        color: "transparent"
+        border.color: "white"
+        border.width: 4   // thickness of the border
+    }
 }
