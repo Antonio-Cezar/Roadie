@@ -4,11 +4,31 @@ import QtQuick.Window 2.15
 Window {
     id: root
     visible: true
-    color: "black"
     width: 800
     height: 480
     visibility: Window.FullScreen
 
+        // === Background ===
+    Rectangle {
+        id: background
+        anchors.fill: parent
+        // Deep blue gradient background
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "#0A1A3F" }   // navy
+            GradientStop { position: 0.5; color: "#123A74" }   // mid-blue
+            GradientStop { position: 1.0; color: "#0A0F1F" }   // near-black
+        }
+
+        // Soft shadow overlay for depth
+        Rectangle {
+            anchors.fill: parent
+            color: Qt.rgba(0, 0, 0, 0.25)  // semi-transparent black layer
+        }
+    }
+
+
+
+        // === MAIN ===
     Row {
         id: mainRow
         anchors.fill: parent
@@ -86,7 +106,7 @@ Window {
                 size: parent.width
                 onClicked: {
                     console.log("Menu clicked")
-                    menuPopup.show()    // ✅ works in all Qt versions
+                    menuPopup.show()
                 }
             }
         }
@@ -132,7 +152,7 @@ Window {
                 size: 100
                 onClicked: {
                     console.log("Exit clicked")
-                    Qt.quit()  // ✅ closes the whole app
+                    Qt.quit() 
                 }
             }
         }
