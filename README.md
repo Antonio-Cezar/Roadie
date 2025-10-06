@@ -15,7 +15,8 @@ Completed Phases
 
 
 
-Current & Upcoming Phases
+Current & Upcoming Phases:
+
 4. GUI Development – building the first working interface on the Raspberry Pi 5 display.
 
 5. Core Functions & AI Integration – connecting the camera feed, detection libraries, and algorithms for road alerts.
