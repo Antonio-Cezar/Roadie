@@ -1,4 +1,4 @@
-# How to run the GUI on linux:
+# How to run the Roadei GUI on linux:
 
 
 ### First: Change to execute 
