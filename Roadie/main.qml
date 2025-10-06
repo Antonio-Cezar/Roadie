@@ -1,10 +1,15 @@
 import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick.Window 2.15
 
-ApplicationWindow {
+Window {
+    id: root
     visible: true
-    visibility: "FullScreen"    // open in fullscreen
+    color: "black"
+
+    // for your 800x480 device (fullscreen will override size)
     width: 800
     height: 480
-    color: "black"
+
+    // open fullscreen
+    visibility: Window.FullScreen
 }
