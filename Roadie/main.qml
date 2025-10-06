@@ -15,7 +15,7 @@ Window {
         // Deep blue gradient background
         gradient: Gradient {
             GradientStop { position: 0.0; color: "#0A1A3F" }
-            GradientStop { position: 0.5; color: "#ff4800ff" }
+            GradientStop { position: 0.5; color: "#832500ff" }
             GradientStop { position: 1.0; color: "#0A0F1F" }
         }
 
