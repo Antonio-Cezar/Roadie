@@ -30,10 +30,9 @@ Window {
                 height: parent.height - infoRow.height - leftCol.spacing
                 borderWidth: 2
                 borderColor: "white"
-                radius: 0
             }
 
-            // Info tiles
+            // Bottom info tiles (data-driven)
             Row {
                 id: infoRow
                 spacing: 10
@@ -61,7 +60,7 @@ Window {
             }
         }
 
-        // RIGHT SIDEBAR
+        // RIGHT: sidebar
         Column {
             id: sideBar
             spacing: 10
@@ -75,7 +74,7 @@ Window {
                 height: 90
             }
 
-            Item { width: 0.5; height: 0.5 }
+            Item { height: 5 }
 
             RoundButton {
                 text: "(BUTTON)\nRegister to service"
@@ -86,8 +85,8 @@ Window {
                 text: "(BUTTON)\nMenu"
                 size: parent.width
                 onClicked: {
-                    console.log("Menu opened")
-                    menuPopup.open()
+                    console.log("Menu clicked")
+                    menuPopup.show()    // ✅ works in all Qt versions
                 }
             }
         }
@@ -97,7 +96,7 @@ Window {
     Window {
         id: menuPopup
         width: 500
-        height: 180
+        height: 200
         color: "black"
         flags: Qt.Dialog | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
         modality: Qt.ApplicationModal
@@ -114,7 +113,7 @@ Window {
 
         Row {
             anchors.centerIn: parent
-            spacing: 30
+            spacing: 40
 
             RoundButton {
                 text: "Option 1"
@@ -133,7 +132,7 @@ Window {
                 size: 100
                 onClicked: {
                     console.log("Exit clicked")
-                    Qt.quit()  // ✅ closes entire app
+                    Qt.quit()  // ✅ closes the whole app
                 }
             }
         }
