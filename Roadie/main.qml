@@ -23,7 +23,6 @@ Window {
             anchors.bottom: parent.bottom
             width: parent.width - sideBar.width - mainRow.spacing
 
-            // Main panel (forward warning)
             ForwardWarningPanel {
                 id: fwdPanel
                 anchors.left: parent.left
@@ -34,7 +33,7 @@ Window {
                 radius: 0
             }
 
-            // Bottom info tiles (data-driven)
+            // Info tiles
             Row {
                 id: infoRow
                 spacing: 10
@@ -62,7 +61,7 @@ Window {
             }
         }
 
-        // RIGHT: sidebar
+        // RIGHT SIDEBAR
         Column {
             id: sideBar
             spacing: 10
@@ -71,57 +70,48 @@ Window {
             anchors.bottom: parent.bottom
 
             RectButton {
-                id: wifiBtn
                 text: "(BUTTON)\nWifi Connection"
                 width: parent.width
                 height: 90
-                onClicked: console.log("wifiBtn clicked")
             }
 
             Item { width: 0.5; height: 0.5 }
 
             RoundButton {
-                id: registerBtn
                 text: "(BUTTON)\nRegister to service"
                 size: parent.width
-                onClicked: console.log("register clicked")
             }
 
             RoundButton {
-                id: menuBtn
                 text: "(BUTTON)\nMenu"
                 size: parent.width
                 onClicked: {
-                    console.log("menu clicked")
-                    menuPopup.visible = true
+                    console.log("Menu opened")
+                    menuPopup.open()
                 }
             }
         }
     }
 
-    // =============== POPUP MENU WINDOW ===============
-    Rectangle {
+    // ================= POPUP MENU =================
+    Window {
         id: menuPopup
-        visible: false
         width: 500
         height: 180
-        radius: 10
         color: "black"
-        border.color: "white"
-        border.width: 3
-        anchors.centerIn: parent
-        z: 999
+        flags: Qt.Dialog | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
+        modality: Qt.ApplicationModal
+        visible: false
+        title: "Menu"
 
-        // White frame for clarity
         Rectangle {
             anchors.fill: parent
             color: "transparent"
             border.color: "white"
-            border.width: 2
+            border.width: 3
             radius: 10
         }
 
-        // Row of 3 circular buttons
         Row {
             anchors.centerIn: parent
             spacing: 30
@@ -143,24 +133,13 @@ Window {
                 size: 100
                 onClicked: {
                     console.log("Exit clicked")
-                    Qt.quit() // this exits the entire GUI app
-                }
-            }
-        }
-
-        // Optional: click outside popup to close it
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                // If clicked outside the row of buttons, close popup
-                if (!childAt(mouse.x, mouse.y)) {
-                    menuPopup.visible = false
+                    Qt.quit()  // ✅ closes entire app
                 }
             }
         }
     }
 
-    // ================== Components ==================
+    // ================= COMPONENTS =================
     component ForwardWarningPanel: Rectangle {
         id: panel
         property string mode: "idle"
