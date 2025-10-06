@@ -10,3 +10,9 @@
 ### Second: Only run automated script: 
 
 "./run_roadie.sh"
+
+
+## If not working, run the script for installing dependencies:
+
+"chmod +x install_dependencies.sh"
+"./install_dependencies.sh"
