@@ -15,14 +15,14 @@ Window {
         // Deep blue gradient background
         gradient: Gradient {
             GradientStop { position: 0.0; color: "#0A1A3F" }
-            GradientStop { position: 0.5; color: "#832500ff" }
+            GradientStop { position: 0.5; color: "#852d0bff" }
             GradientStop { position: 1.0; color: "#0A0F1F" }
         }
 
         // Soft shadow overlay for depth
         Rectangle {
             anchors.fill: parent
-            color: Qt.rgba(0, 0, 0, 0.25)  // semi-transparent black layer
+            color: Qt.rgba(0, 0, 0, 0.25)
         }
     }
 
