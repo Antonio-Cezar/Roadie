@@ -1,6 +1,4 @@
-==================================
-How to run the GUI on linux:
-==================================
+# How to run the GUI on linux:
 
 
 ### First: Change to execute 
