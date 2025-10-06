@@ -67,7 +67,7 @@ Window {
         Column {
             id: sideBar
             spacing: 10
-            width: 160
+            width: 170
             anchors.top: parent.top
             anchors.bottom: parent.bottom
 
@@ -75,7 +75,7 @@ Window {
                 id: wifiBtn
                 text: "(BUTTON)\nWifi Connection"
                 width: parent.width
-                height: 80
+                height: 90
                 onClicked: console.log("wifiBtn clicked")
             }
 
