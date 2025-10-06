@@ -4,7 +4,7 @@ import QtQuick.Window 2.15
 Window {
     id: root
     visible: true
-    color: "black"
+    color: "#1E90FF"
     width: 800
     height: 480
     visibility: Window.FullScreen
@@ -32,7 +32,6 @@ Window {
                 borderWidth: 2
                 borderColor: "white"
                 radius: 0
-                // Later from Python/QML: fwdPanel.mode = "warning" / "error" / etc.
             }
 
             // Bottom info tiles (data-driven)
@@ -93,7 +92,61 @@ Window {
                 id: menuBtn
                 text: "(BUTTON)\nMenu"
                 size: parent.width
-                onClicked: console.log("menu clicked")
+                onClicked: {
+                    console.log("menu clicked")
+                    menuPopup.visible = true
+                }
+            }
+        }
+    }
+
+    // =============== POPUP MENU WINDOW ===============
+    Rectangle {
+        id: menuPopup
+        visible: false
+        width: 400
+        height: 300
+        radius: 10
+        color: "black"
+        border.color: "white"
+        border.width: 3
+        anchors.centerIn: parent
+        z: 999
+
+        Column {
+            anchors.centerIn: parent
+            spacing: 20
+
+            RoundButton {
+                text: "Option 1"
+                size: 100
+                onClicked: console.log("Option 1 clicked")
+            }
+
+            RoundButton {
+                text: "Option 2"
+                size: 100
+                onClicked: console.log("Option 2 clicked")
+            }
+
+            RoundButton {
+                text: "Exit"
+                size: 100
+                onClicked: {
+                    console.log("Exit clicked")
+                    Qt.quit()   // closes the whole app
+                }
+            }
+        }
+
+        // Dismiss popup when clicking outside (optional)
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                // Only close if clicked outside the central buttons
+                if (!childAt(mouse.x, mouse.y)) {
+                    menuPopup.visible = false
+                }
             }
         }
     }
@@ -103,7 +156,7 @@ Window {
     // Forward warning panel: switchable "cases" via `mode`
     component ForwardWarningPanel: Rectangle {
         id: panel
-        property string mode: "idle"   // "idle" | "warning" | "error" | add more later
+        property string mode: "idle"   // "idle" | "warning" | "error"
         property color borderColor: "white"
         property int borderWidth: 2
         radius: 0
