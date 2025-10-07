@@ -18,7 +18,7 @@ ApplicationWindow {
         visible: true
 
         Behavior on opacity {
-            NumberAnimation { duration: 200; easing.type: Easing.InOutQuad }
+            NumberAnimation { duration: 800; easing.type: Easing.InOutQuad }
         }
     }
 
