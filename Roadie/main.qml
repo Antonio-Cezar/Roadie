@@ -74,10 +74,10 @@ ApplicationWindow {
 
                 ListModel {
                     id: infoModel
-                    ListElement { title: "Google Maps\nSpeed limit"; "Disconnected" }
-                    ListElement { title: "AI CAM Detection\nSpeed limit"; "Disconnected" }
+                    ListElement { title: "Google Maps\nSpeed"; "Disconnected" }
+                    ListElement { title: "AI CAM Detection\nSpeed"; "Disconnected" }
                     ListElement { title: "Service connection"; value: "Disconnected" }
-                    ListElement { title: "Service connection info"; "Disconnected" }
+                    ListElement { title: "Service connection"; "Disconnected" }
                 }
 
                 Repeater {
@@ -290,9 +290,9 @@ ApplicationWindow {
             anchors.fill: parent
             anchors.margins: 8
             spacing: 4
-            Text { text: title; color: "white"; opacity: 0.85; font.pixelSize: 12 }
+            Text { text: "(INFO)"; color: "white"; opacity: 0.85; font.pixelSize: 12 }
             Text { text: title; color: "white"; wrapMode: Text.WordWrap; font.pixelSize: 12 }
-            Text { text: title; color: "white"; font.pixelSize: 12 }
+            Text { text: value; color: "white"; font.pixelSize: 12 }
         }
     }
 }
