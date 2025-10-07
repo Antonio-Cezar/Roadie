@@ -70,7 +70,7 @@ ApplicationWindow {
                 spacing: 10
                 anchors.left: parent.left
                 anchors.right: parent.right
-                height: 90
+                height: 110
 
                 ListModel {
                     id: infoModel
