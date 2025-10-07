@@ -3,7 +3,7 @@
 ### only need to run 
 
 python3 main.py
--------------------------------
+
 
 
 
@@ -11,7 +11,7 @@ python3 main.py
 
 "chmod +x install_dependencies.sh"
 "./install_dependencies.sh"
--------------------------------
+
 
 
 
@@ -22,4 +22,3 @@ cd /home/****/Roadie/Roadie
 
 1. Copy the file "Roadie.sh" to Dekstop.
 2. right click --> run as a program.
--------------------------------
