@@ -539,14 +539,44 @@ ApplicationWindow {
         }
     }
 
+    // ==== RectButton with press/tap animations ====
     component RectButton: Rectangle {
         id: rectBtn
         property alias text: label.text
         signal clicked
-        radius: 6
+
+        radius: 10
         color: "transparent"
         border.color: "white"
         border.width: 2
+        antialiasing: true
+
+        // Press feedback: scale + slight fade
+        property real pressedScale: 0.96
+        property real normalScale: 1.0
+        scale: mouse.pressed ? pressedScale : normalScale
+        opacity: mouse.pressed ? 0.9 : 1.0
+
+        // Smooth animation of scale/opacity
+        Behavior on scale { NumberAnimation { duration: 90; easing.type: Easing.OutQuad } }
+        Behavior on opacity { NumberAnimation { duration: 90; easing.type: Easing.OutQuad } }
+
+        // Tap pulse overlay (brief flash)
+        Rectangle {
+            id: tapPulse
+            anchors.fill: parent
+            radius: rectBtn.radius
+            color: "white"
+            opacity: 0.0
+        }
+
+        // Triggered on click: quick flash + spring back (if needed)
+        SequentialAnimation {
+            id: tapAnim
+            running: false
+            PropertyAnimation { target: tapPulse; property: "opacity"; from: 0.0; to: 0.18; duration: 70; easing.type: Easing.OutQuad }
+            PropertyAnimation { target: tapPulse; property: "opacity"; to: 0.0; duration: 120; easing.type: Easing.InQuad }
+        }
 
         Text {
             id: label
@@ -557,15 +587,23 @@ ApplicationWindow {
             color: "white"
         }
 
-        MouseArea { anchors.fill: parent; onClicked: rectBtn.clicked() }
+        MouseArea {
+            id: mouse
+            anchors.fill: parent
+            onClicked: {
+                tapAnim.restart()
+                rectBtn.clicked()
+            }
+        }
     }
 
-    // === UPDATED RoundButton with fontScale property ===
+
+    // ==== RoundButton with press/tap animations ====
     component RoundButton: Rectangle {
         id: roundBtn
         property alias text: label.text
         property int size: 180
-        property real fontScale: 0.15   // default text size scale
+        property real fontScale: 0.15
         signal clicked
 
         width: size
@@ -574,6 +612,38 @@ ApplicationWindow {
         color: "transparent"
         border.color: "white"
         border.width: 2
+        antialiasing: true
+
+        // Press feedback: scale + slight fade
+        property real pressedScale: 0.96
+        property real normalScale: 1.0
+        scale: mouse.pressed ? pressedScale : normalScale
+        opacity: mouse.pressed ? 0.9 : 1.0
+
+        Behavior on scale { NumberAnimation { duration: 90; easing.type: Easing.OutQuad } }
+        Behavior on opacity { NumberAnimation { duration: 90; easing.type: Easing.OutQuad } }
+
+        // Tap pulse overlay as a ring
+        Rectangle {
+            id: pulse
+            anchors.centerIn: parent
+            width: roundBtn.width
+            height: roundBtn.height
+            radius: width / 2
+            border.width: 2
+            border.color: "white"
+            color: "transparent"
+            opacity: 0.0
+        }
+        SequentialAnimation {
+            id: ripple
+            running: false
+            ParallelAnimation {
+                PropertyAnimation { target: pulse; property: "opacity"; from: 0.3; to: 0.0; duration: 160; easing.type: Easing.OutQuad }
+                PropertyAnimation { target: pulse; property: "scale"; from: 0.92; to: 1.08; duration: 160; easing.type: Easing.OutQuad }
+            }
+            onStopped: pulse.scale = 1.0
+        }
 
         Text {
             id: label
@@ -585,8 +655,16 @@ ApplicationWindow {
             color: "white"
         }
 
-        MouseArea { anchors.fill: parent; onClicked: roundBtn.clicked() }
+        MouseArea {
+            id: mouse
+            anchors.fill: parent
+            onClicked: {
+                ripple.restart()
+                roundBtn.clicked()
+            }
+        }
     }
+
 
     component InfoTile: Rectangle {
         id: tile
