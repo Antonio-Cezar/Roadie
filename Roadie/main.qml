@@ -145,7 +145,7 @@ ApplicationWindow {
 
             Row {
                 anchors.centerIn: parent
-                spacing: 40
+                spacing: 30
 
                 RoundButton {
                     text: "Option 1"
