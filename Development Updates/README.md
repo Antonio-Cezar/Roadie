@@ -16,9 +16,11 @@ The functionalities for the buttons are now being developed as we speak.
 
 Adding buttons functionalities.
 
-![GUI_ain](images/IMG_0065.jpeg)
+![GUI_main](images/IMG_0064.jpeg)
 
-![GUI_menu](images/IMG_0066.jpeg)
+![GUI_menu](images/IMG_0065.jpeg)
+
+![GUI_menu_exit](images/IMG_0066.jpeg)
 
 ![GUI_register](images/IMG_0067.jpeg)
 
