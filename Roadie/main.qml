@@ -144,7 +144,7 @@ ApplicationWindow {
             RoundButton {
                 text: "Exit"
                 size: 100
-                onClicked: menuPopup.close()
+                onClicked: Qt.quit()
             }
         }
     }
