@@ -126,10 +126,10 @@ ApplicationWindow {
         id: menuPopup
         modal: true
         focus: true
-        x: (root.width - width) / 3
-        y: (root.height - height) / 3
-        width: 500
-        height: 200
+        x: (root.width - width) / 2
+        y: (root.height - height) / 2
+        width: 700
+        height: 400
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
         background: Rectangle {
