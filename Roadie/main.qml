@@ -99,12 +99,17 @@ ApplicationWindow {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
 
-            RectButton {
-                text: "Wifi Connection"
-                width: parent.width
-                height: 90
-                //onClicked: 
+        RectButton {
+            id: wifiBtn
+            text: wifi.connected ? "Wifi: " + wifi.connectedSsid : "Wifi: Disconnected"
+            width: parent.width
+            height: 90
+            onClicked: {
+                wifiPopup.open()
+                wifi.scan()
             }
+        }
+
 
             Item { height: 5 }
 
