@@ -2,17 +2,7 @@
 
 ### only need to run.
 
-'python3 main.py'
-
-<div style="position: relative;">
-  <pre><code class="language-bash">npm install
-npm run dev</code></pre>
-  <button onclick="navigator.clipboard.writeText('npm install\nnpm run dev')" 
-          style="position:absolute;top:5px;right:5px;padding:4px 8px;border:none;border-radius:4px;background:#333;color:white;cursor:pointer;">
-    Copy
-  </button>
-</div>
-
+"python3 main.py"
 
 
 
@@ -29,9 +19,9 @@ npm run dev</code></pre>
 
 Use the file "Roadie.sh"
 
-(Change the cd path to your folde)
+1. Change the cd path to your folde
 
-cd /home/****/Roadie/Roadie
+"cd /home/****/Roadie/Roadie"
 
-1. Copy the file "Roadie.sh" to Dekstop.
-2. right click --> run as a program.
+2. Copy the file "Roadie.sh" to Dekstop.
+3. right click on the dekstop --> run as a program.
