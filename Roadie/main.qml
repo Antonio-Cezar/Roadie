@@ -104,34 +104,31 @@ Window {
             RoundButton {
                 text: "(BUTTON)\nMenu"
                 size: parent.width
-                onClicked: {
-                    console.log("Menu clicked")
-                    menuPopup.show()
-                }
+                onClicked: menuPopup.open()
             }
         }
     }
 
     // ================= POPUP MENU =================
-    Window {
+    Popup {
         id: menuPopup
+        modal: true
+        focus: true
+        x: (root.width - width) / 2
+        y: (root.height - height) / 2
         width: 500
         height: 200
-        color: "black"
-        flags: Qt.Dialog | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
-        modality: Qt.ApplicationModal
-        visible: false
-        title: "Menu"
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
-        Rectangle {
+        background: Rectangle {
             anchors.fill: parent
-            color: "transparent"
+            color: "black"
+            radius: 10
             border.color: "white"
             border.width: 3
-            radius: 10
         }
 
-        Row {
+        contentItem: Row {
             anchors.centerIn: parent
             spacing: 40
 
@@ -140,23 +137,19 @@ Window {
                 size: 100
                 onClicked: console.log("Option 1 clicked")
             }
-
             RoundButton {
                 text: "Option 2"
                 size: 100
                 onClicked: console.log("Option 2 clicked")
             }
-
             RoundButton {
                 text: "Exit"
                 size: 100
-                onClicked: {
-                    console.log("Exit clicked")
-                    Qt.quit() 
-                }
+                onClicked: Qt.quit()
             }
         }
     }
+
 
     // ================= COMPONENTS =================
     component ForwardWarningPanel: Rectangle {

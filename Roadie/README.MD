@@ -7,7 +7,7 @@
 
 
 
-## If not working, run the script for installing dependencies:
+## If not working, run the script for installing dependencies.
 
 "chmod +x install_dependencies.sh"
 "./install_dependencies.sh"
