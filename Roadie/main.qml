@@ -181,15 +181,6 @@ ApplicationWindow {
                     implicitHeight: 42
                     onClicked: wifi.scan()
                 }
-
-                RectButton {
-                    id: disconnectBtn
-                    text: "Disconnect"
-                    implicitWidth: 130
-                    implicitHeight: 42
-                    enabled: wifi.connected
-                    onClicked: wifi.disconnect(wifi.connectedSsid)
-                }
             }
 
             // Empty state (shows if no networks in model)
