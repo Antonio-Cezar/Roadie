@@ -101,7 +101,7 @@ ApplicationWindow {
             anchors.bottom: parent.bottom
 
             RectButton {
-                text: "(BUTTON)\nWifi Connection"
+                text: "Wifi Connection"
                 width: parent.width
                 height: 90
             }
@@ -109,12 +109,12 @@ ApplicationWindow {
             Item { height: 5 }
 
             RoundButton {
-                text: "(BUTTON)\nRegister to service"
+                text: "Register to \nservice"
                 size: parent.width
             }
 
             RoundButton {
-                text: "(BUTTON)\nMenu"
+                text: "Menu"
                 size: parent.width
                 onClicked: menuPopup.open()
             }
