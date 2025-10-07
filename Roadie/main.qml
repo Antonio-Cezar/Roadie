@@ -127,6 +127,12 @@ ApplicationWindow {
         }
     }
 
+    Connections {
+    target: wifi
+    function onMessage(m) { console.log(m) } // or show on-screen label/snackbar
+    }
+
+
     // ================= POPUP WIFI =================
         Popup {
         id: wifiPopup
