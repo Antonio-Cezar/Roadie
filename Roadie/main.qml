@@ -128,8 +128,8 @@ ApplicationWindow {
         focus: true
         x: (root.width - width) / 2
         y: (root.height - height) / 2
-        width: 600
-        height: 260
+        width: 620
+        height: 300
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
         background: Rectangle {
@@ -153,12 +153,12 @@ ApplicationWindow {
                 }
 
                 RoundButton {
-                    text: "Option 2"
+                    text: ""
                     size: 150
                 }
 
                 RoundButton {
-                    text: "Exit"
+                    text: ""
                     size: 150
                 }
             }
