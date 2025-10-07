@@ -13,7 +13,7 @@ ApplicationWindow {
     Overlay.modal: Rectangle {
         anchors.fill: parent
         color: "#000000"        
-        opacity: 3.0              
+        opacity: 1.0              
         z: 9999                    
         visible: true
 
@@ -270,6 +270,7 @@ ApplicationWindow {
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignHCenter
             font.bold: true
+            font.pixelSize: size * 0.18
             color: "white"
         }
 
