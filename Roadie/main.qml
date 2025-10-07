@@ -103,6 +103,7 @@ ApplicationWindow {
                 text: "Wifi Connection"
                 width: parent.width
                 height: 90
+                onClicked: 
             }
 
             Item { height: 5 }
