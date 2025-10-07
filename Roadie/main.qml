@@ -128,7 +128,7 @@ ApplicationWindow {
         focus: true
         x: (root.width - width) / 2
         y: (root.height - height) / 2
-        width: 700
+        width: 550
         height: 400
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
