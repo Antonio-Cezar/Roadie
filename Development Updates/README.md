@@ -9,3 +9,17 @@ The functionalities for the buttons are now being developed as we speak.
 ![GUI_main](images/IMG_0059.jpeg)
 
 ![GUI_main](images/IMG_0060.jpeg)
+
+
+
+# Second Look at the GUI
+
+Adding buttons functionalities.
+
+![GUI_ain](images/IMG_0065.jpeg)
+
+![GUI_menu](images/IMG_0066.jpeg)
+
+![GUI_register](images/IMG_0067.jpeg)
+
+![GUI_wifi](images/IMG_0068.jpeg)
