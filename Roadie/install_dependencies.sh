@@ -1,29 +1,36 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
-echo "=== Installing Python and Qt dependencies for PySide6 QML app ==="
+echo "=== Installing Python and Qt dependencies for a PySide6 + QML app (Ubuntu) ==="
 
 # Update package list
 sudo apt update
 
-# Install Python and Pip (if not installed)
+# Install Python and venv
 sudo apt install -y python3 python3-pip python3-venv
 
-# Install PySide6 (Qt for Python)
-pip install --upgrade pip
-pip install PySide6
-
-# Install system-level Qt runtime modules (ensures QML and Window modules work)
+# System-level Qt 6 runtime & dev packages (QML + Quick + Controls2)
 sudo apt install -y \
-    qml6-module-qtquick \
-    qml6-module-qtquick-window \
-    qml6-module-qtqml \
-    qt6-base-dev
+  qt6-base-dev \
+  qt6-declarative-dev \
+  qt6-declarative-dev-tools \
+  qml6-module-qtqml \
+  qml6-module-qtquick \
+  qml6-module-qtquick-window \
+  qml6-module-qtquick-controls2 \
+  qml6-module-qtquick-templates2
 
-# Optional: tools for debugging QML or running GUI apps
-sudo apt install -y qt6-declarative-dev-tools
+echo "=== Creating virtual environment and installing PySide6 ==="
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install PySide6
 
-echo "=== All dependencies installed successfully! ==="
+echo "=== Done! ==="
 echo
-echo "You can now run your app with:"
+echo "Run your app like this:"
+echo "  source .venv/bin/activate"
 echo "  python3 main.py"
+echo
+echo "Optional: to test QML quickly, you can use (from qt6-declarative-dev-tools):"
+echo "  qml6scene yourfile.qml"
