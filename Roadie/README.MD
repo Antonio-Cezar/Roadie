@@ -15,7 +15,10 @@ python3 main.py
 
 
 
-## If you want to wun from Dekstop.
+## If you want to run from Dekstop.
+
+Use the file "Roadie.sh"
+
 (Change the cd path to your folde)
 
 cd /home/****/Roadie/Roadie
