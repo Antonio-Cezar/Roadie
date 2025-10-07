@@ -11,10 +11,16 @@ ApplicationWindow {
 
     // Dim background when a modal popup is open
     Overlay.modal: Rectangle {
-        color: Qt.rgba(0, 0, 0, 0.9)  // darker dim (0.7 = 70% opacity)
-        Behavior on color {
-            ColorAnimation { duration: 200 }  // smooth fade when popup opens/closes
+        // Almost black overlay (95% opacity)
+        color: Qt.rgba(0, 0, 0, 0.95)
+
+        // Optional: smooth fade when popup opens/closes
+        Behavior on opacity {
+            NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
         }
+
+        // Make sure overlay itself fades in/out rather than color
+        opacity: 1.0
     }
 
     // === Background ===
