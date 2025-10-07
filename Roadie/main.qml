@@ -153,7 +153,7 @@ ApplicationWindow {
                 }
 
                 RoundButton {
-                    text: "Politikontroll app \nregister"
+                    text: "Politikontroll \nregister"
                     size: 170
                     fontScale: 0.12
                 }
