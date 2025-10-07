@@ -12,18 +12,17 @@ ApplicationWindow {
     // Dim background when a modal popup is open
     Overlay.modal: Rectangle {
         anchors.fill: parent
-        color: "#000000"        
-        opacity: 1.0              
-        z: 9999                    
+        color: "#000000"
+        opacity: 1.0
+        z: 9999
         visible: true
 
         Behavior on visible {
             SequentialAnimation {
                 NumberAnimation { target: parent; property: "opacity"; from: 0; to: 0.9; duration: 200 }
-                }   
             }
         }
-
+    }
 
     // === Background ===
     Rectangle {
@@ -64,7 +63,7 @@ ApplicationWindow {
                 borderColor: "white"
             }
 
-            // Bottom info tiles (data-driven)
+            // Bottom info tiles
             Row {
                 id: infoRow
                 spacing: 10
@@ -122,7 +121,7 @@ ApplicationWindow {
         }
     }
 
-    // ================= POPUP Register =============
+    // ================= POPUP REGISTER =================
     Popup {
         id: regPopup
         focus: true
@@ -150,16 +149,19 @@ ApplicationWindow {
                 RoundButton {
                     text: "Google Maps \nRoad warning"
                     size: 170
+                    fontScale: 0.12     // smaller text only here
                 }
 
                 RoundButton {
                     text: ""
                     size: 170
+                    fontScale: 0.12
                 }
 
                 RoundButton {
                     text: ""
                     size: 170
+                    fontScale: 0.12
                 }
             }
         }
@@ -212,6 +214,7 @@ ApplicationWindow {
         }
     }
 
+    // ================= CONFIRM EXIT DIALOG =================
     Dialog {
         id: confirmExit
         modal: true
@@ -243,8 +246,6 @@ ApplicationWindow {
             onRejected: confirmExit.close()
         }
     }
-
-
 
     // ================= COMPONENTS =================
     component ForwardWarningPanel: Rectangle {
@@ -328,10 +329,12 @@ ApplicationWindow {
         MouseArea { anchors.fill: parent; onClicked: rectBtn.clicked() }
     }
 
+    // === UPDATED RoundButton with fontScale property ===
     component RoundButton: Rectangle {
         id: roundBtn
         property alias text: label.text
         property int size: 180
+        property real fontScale: 0.15   // default text size scale
         signal clicked
 
         width: size
@@ -347,7 +350,7 @@ ApplicationWindow {
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignHCenter
             font.bold: true
-            font.pixelSize: size * 0.15
+            font.pixelSize: Math.round(size * roundBtn.fontScale)
             color: "white"
         }
 
