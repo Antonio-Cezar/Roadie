@@ -149,19 +149,19 @@ ApplicationWindow {
 
                 RoundButton {
                     text: "Option 1"
-                    size: 200
+                    size: 150
                     onClicked: console.log("Option 1 clicked")
                 }
 
                 RoundButton {
                     text: "Option 2"
-                    size: 200
+                    size: 150
                     onClicked: console.log("Option 2 clicked")
                 }
 
                 RoundButton {
                     text: "Exit"
-                    size: 200
+                    size: 150
                     onClicked: Qt.quit()
                 }
             }
