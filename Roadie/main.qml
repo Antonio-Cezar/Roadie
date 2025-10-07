@@ -12,13 +12,13 @@ ApplicationWindow {
     // Dim background when a modal popup is open
     Overlay.modal: Rectangle {
         anchors.fill: parent
-        color: "#000000"            // pure black
-        opacity: 1                // 90% solid — tune between 0.9–1.0 if needed
-        z: 9999                     // make absolutely sure it’s on top
+        color: "#000000"        
+        opacity: 3              
+        z: 9999                    
         visible: true
 
         Behavior on opacity {
-            NumberAnimation { duration: 1000; easing.type: Easing.InOutQuad }
+            NumberAnimation { duration: 100; easing.type: Easing.InOutQuad }
         }
     }
 
