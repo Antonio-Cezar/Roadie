@@ -192,7 +192,7 @@ ApplicationWindow {
             Item {
                 Text {
                     anchors.centerIn: parent
-                    text: "Forward warning detection"
+                    text: "Forward warning detection \n(Disconnected)"
                     font.pixelSize: 26
                     font.bold: true
                     color: "white"
