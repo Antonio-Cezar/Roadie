@@ -128,8 +128,8 @@ ApplicationWindow {
         focus: true
         x: (root.width - width) / 2
         y: (root.height - height) / 2
-        width: 550
-        height: 250
+        width: 600
+        height: 260
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
         background: Rectangle {
@@ -148,7 +148,7 @@ ApplicationWindow {
                 spacing: 30
 
                 RoundButton {
-                    text: "Google Maps \nRoad warning register"
+                    text: "Google Maps \nRoad warning"
                     size: 150
                 }
 
