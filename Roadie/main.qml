@@ -158,25 +158,42 @@ ApplicationWindow {
             spacing: 10
 
             // Header with refresh + current status
-            Row {
-                width: parent.width
-                spacing: 10
-                Text {
-                    text: wifi.connected ? "Connected: " + wifi.connectedSsid : "Not connected"
-                    color: "white"
-                    font.bold: true
-                    font.pixelSize: 18
-                    elide: Text.ElideRight
-                    width: parent.width - refreshBtn.implicitWidth - 20
-                }
-                RectButton {
-                    id: refreshBtn
-                    text: "Rescan"
-                    implicitWidth: 110
-                    implicitHeight: 38
-                    onClicked: wifi.scan()
+            // Header with refresh + disconnect + current status
+    Row {
+        width: parent.width
+        spacing: 10
+
+        Text {
+            text: wifi.connected ? "Connected: " + wifi.connectedSsid : "Not connected"
+            color: "white"
+            font.bold: true
+            font.pixelSize: 18
+            elide: Text.ElideRight
+            width: parent.width - refreshBtn.implicitWidth - disconnectBtn.implicitWidth - 30
+        }
+
+        RectButton {
+            id: refreshBtn
+            text: "Rescan"
+            implicitWidth: 110
+            implicitHeight: 42
+            onClicked: wifi.scan()
+        }
+
+        RectButton {
+            id: disconnectBtn
+            text: "Disconnect"
+            implicitWidth: 130
+            implicitHeight: 42
+            enabled: wifi.connected
+            onClicked: {
+                if (wifi.connected) {
+                    wifi.disconnect(wifi.connectedSsid)
                 }
             }
+        }
+    }
+
 
             // Networks list
             ListView {
