@@ -298,6 +298,7 @@ ApplicationWindow {
         x: (root.width - width) / 2
         y: (root.height - height) / 2
         width: 400
+        height: 200
         title: "Enter Wi-Fi Password"
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
