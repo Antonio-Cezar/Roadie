@@ -149,17 +149,17 @@ ApplicationWindow {
 
                 RoundButton {
                     text: "Google Maps \nRoad warning"
-                    size: 150
+                    size: 170
                 }
 
                 RoundButton {
                     text: ""
-                    size: 150
+                    size: 170
                 }
 
                 RoundButton {
                     text: ""
-                    size: 150
+                    size: 170
                 }
             }
         }
