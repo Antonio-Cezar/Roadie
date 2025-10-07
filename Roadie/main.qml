@@ -290,9 +290,9 @@ ApplicationWindow {
             anchors.fill: parent
             anchors.margins: 8
             spacing: 4
-            Text { text: color: "white"; opacity: 0.85; font.pixelSize: 12 }
+            Text { text: title; color: "white"; opacity: 0.85; font.pixelSize: 12 }
             Text { text: title; color: "white"; wrapMode: Text.WordWrap; font.pixelSize: 12 }
-            Text { text: value; color: "white"; font.pixelSize: 12 }
+            Text { text: title; color: "white"; font.pixelSize: 12 }
         }
     }
 }
