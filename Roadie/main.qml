@@ -13,14 +13,16 @@ ApplicationWindow {
     Overlay.modal: Rectangle {
         anchors.fill: parent
         color: "#000000"        
-        opacity: 3              
+        opacity: 3.0              
         z: 9999                    
         visible: true
 
-        Behavior on opacity {
-            NumberAnimation { duration: 100; easing.type: Easing.InOutQuad }
+        Behavior on visible {
+            SequentialAnimation {
+                NumberAnimation { target: parent; property: "opacity"; from: 0; to: 0.9; duration: 200 }
+                }   
+            }
         }
-    }
 
 
     // === Background ===
