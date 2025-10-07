@@ -59,7 +59,7 @@ ApplicationWindow {
                 id: fwdPanel
                 anchors.left: parent.left
                 anchors.right: parent.right
-                height: parent.height - infoRow.height - leftCol.spacing - 60
+                height: parent.height - infoRow.height - leftCol.spacing - 40
                 borderWidth: 2
                 borderColor: "white"
             }
