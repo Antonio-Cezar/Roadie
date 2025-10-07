@@ -29,7 +29,6 @@ python -m pip install PySide6
 echo "=== Done! ==="
 echo
 echo "Run your app like this:"
-echo "  source .venv/bin/activate"
 echo "  python3 main.py"
 echo
 echo "Optional: to test QML quickly, you can use (from qt6-declarative-dev-tools):"

@@ -128,8 +128,8 @@ ApplicationWindow {
     }
 
     Connections {
-    target: wifi
-    function onMessage(m) { console.log(m) } // or show on-screen label/snackbar
+        target: wifi
+        function onMessage(m) { console.log(m) } // or show on-screen label/snackbar
     }
 
 
