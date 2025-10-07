@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
+import QtQuick.Controls 2.15
 
 Window {
     id: root
@@ -145,7 +146,7 @@ Window {
             RoundButton {
                 text: "Exit"
                 size: 100
-                onClicked: Qt.quit()
+                onClicked: menuPopup.close()
             }
         }
     }
