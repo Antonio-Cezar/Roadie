@@ -10,7 +10,11 @@ ApplicationWindow {
     visibility: Window.FullScreen
 
     // Dim background when a modal popup is open
-    Overlay.modal: Rectangle { color: "#80000000" }
+    Overlay.modal: Rectangle {
+        color: Qt.rgba(0, 0, 0, 0.7)  // darker dim (0.7 = 70% opacity)
+        Behavior on color {
+            ColorAnimation { duration: 200 }  // smooth fade when popup opens/closes
+        }
 
     // === Background ===
     Rectangle {
@@ -149,7 +153,7 @@ ApplicationWindow {
                 RoundButton {
                     text: "Exit"
                     size: 100
-                    onClicked: menuPopup.close()
+                    onClicked: Qt.quit()
                 }
             }
         }
