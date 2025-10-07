@@ -1,18 +1,25 @@
 # How to run the Roadei GUI on linux:
 
+### only need to run 
 
-### First: Change to execute 
+python3 main.py
+-------------------------------
 
-"chmod +x run_roadie.sh"
-
-
-
-### Second: Only run automated script: 
-
-"./run_roadie.sh"
 
 
 ## If not working, run the script for installing dependencies:
 
 "chmod +x install_dependencies.sh"
 "./install_dependencies.sh"
+-------------------------------
+
+
+
+## If you want to wun from Dekstop.
+(Change the cd path to your folde)
+
+cd /home/****/Roadie/Roadie
+
+1. Copy the file "Roadie.sh" to Dekstop.
+2. right click --> run as a program.
+-------------------------------
