@@ -127,6 +127,200 @@ ApplicationWindow {
         }
     }
 
+    // ================= POPUP WIFI =================
+        Popup {
+        id: wifiPopup
+        modal: true
+        focus: true
+        x: (root.width - width) / 2
+        y: (root.height - height) / 2
+        width: 640
+        height: 380
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+
+        background: Rectangle {
+            anchors.fill: parent
+            color: "black"
+            radius: 12
+            border.color: "white"
+            border.width: 2
+        }
+
+        Column {
+            anchors.fill: parent
+            anchors.margins: 12
+            spacing: 10
+
+            // Header with refresh + current status
+            Row {
+                width: parent.width
+                spacing: 10
+                Text {
+                    text: wifi.connected ? "Connected: " + wifi.connectedSsid : "Not connected"
+                    color: "white"
+                    font.bold: true
+                    font.pixelSize: 18
+                    elide: Text.ElideRight
+                    width: parent.width - refreshBtn.implicitWidth - 20
+                }
+                RectButton {
+                    id: refreshBtn
+                    text: "Rescan"
+                    implicitWidth: 110
+                    implicitHeight: 38
+                    onClicked: wifi.scan()
+                }
+            }
+
+            // Networks list
+            ListView {
+                id: list
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: parent.height - 110
+                clip: true
+                spacing: 6
+                model: wifi.networks   // list<dict> from Python
+
+                delegate: Rectangle {
+                    width: list.width
+                    height: 52
+                    radius: 8
+                    color: "transparent"
+                    border.color: "white"
+                    border.width: 1
+
+                    Row {
+                        anchors.fill: parent
+                        anchors.margins: 10
+                        spacing: 10
+
+                        // SSID + lock icon
+                        Text {
+                            text: (ssid.length ? ssid : "(hidden)") + (locked ? "  🔒" : "")
+                            color: "white"
+                            font.pixelSize: 16
+                            elide: Text.ElideRight
+                            width: list.width * 0.55
+                        }
+
+                        // Signal bars
+                        Rectangle {
+                            width: 100; height: 8; radius: 4
+                            border.color: "white"; color: "transparent"
+                            Row {
+                                anchors.fill: parent; anchors.margins: 2; spacing: 4
+                                Repeater {
+                                    model: 5
+                                    delegate: Rectangle {
+                                        width: (parent.width - 4*4)/5
+                                        height: parent.height
+                                        color: index < Math.round(signal/20) ? "white" : "#555"
+                                        radius: 2
+                                    }
+                                }
+                            }
+                        }
+
+                        Item { width: 10; height: 1 }
+
+                        // Connect / Disconnect button
+                        RectButton {
+                            id: actionBtn
+                            text: wifi.connected && wifi.connectedSsid === ssid ? "Disconnect" : "Connect"
+                            implicitWidth: 120
+                            implicitHeight: 38
+                            onClicked: {
+                                if (wifi.connected && wifi.connectedSsid === ssid) {
+                                    wifi.disconnect(ssid)
+                                } else {
+                                    if (locked) {
+                                        passSsid.text = ssid
+                                        passField.text = ""
+                                        passDialog.open()
+                                    } else {
+                                        wifi.connect(ssid, "")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Footer: Close
+            Row {
+                width: parent.width
+                spacing: 10
+                RectButton {
+                    text: "Close"
+                    width: 120
+                    height: 40
+                    onClicked: wifiPopup.close()
+                }
+            }
+        }
+    }
+
+    // Password prompt
+    Dialog {
+        id: passDialog
+        modal: true
+        focus: true
+        x: (root.width - width) / 2
+        y: (root.height - height) / 2
+        width: 360
+        title: "Enter Wi-Fi Password"
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+
+        background: Rectangle {
+            anchors.fill: parent
+            color: "black"
+            radius: 10
+            border.color: "white"; border.width: 2
+        }
+
+        contentItem: Column {
+            anchors.fill: parent
+            anchors.margins: 16
+            spacing: 10
+            Text {
+                id: passSsid
+                text: ""
+                color: "white"
+                font.pixelSize: 16
+            }
+            TextField {
+                id: passField
+                placeholderText: "Password"
+                echoMode: TextInput.Password
+                selectByMouse: true
+                color: "white"
+                background: Rectangle { radius: 6; color: "transparent"; border.color: "white"; border.width: 1 }
+            }
+        }
+
+        footer: Row {
+            anchors.right: parent.right
+            anchors.rightMargin: 12
+            spacing: 10
+            RectButton {
+                text: "Cancel"
+                implicitWidth: 110; implicitHeight: 40
+                onClicked: passDialog.close()
+            }
+            RectButton {
+                text: "Connect"
+                implicitWidth: 110; implicitHeight: 40
+                onClicked: {
+                    wifi.connect(passSsid.text, passField.text)
+                    passDialog.close()
+                }
+            }
+        }
+    }
+
+
     // ================= POPUP REGISTER =================
     Popup {
         id: regPopup
