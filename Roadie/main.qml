@@ -74,10 +74,10 @@ ApplicationWindow {
 
                 ListModel {
                     id: infoModel
-                    ListElement { title: "Google Maps\nSpeed"; "Disconnected" }
-                    ListElement { title: "AI CAM Detection\nSpeed"; "Disconnected" }
+                    ListElement { title: "Google Maps\nSpeed"; value: "Disconnected" }
+                    ListElement { title: "AI CAM Detection\nSpeed"; value: "Disconnected" }
                     ListElement { title: "Service connection"; value: "Disconnected" }
-                    ListElement { title: "Service connection"; "Disconnected" }
+                    ListElement { title: "Service connection"; value: "Disconnected" }
                 }
 
                 Repeater {
