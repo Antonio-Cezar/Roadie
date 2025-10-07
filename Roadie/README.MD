@@ -1,8 +1,8 @@
 # How to run the Roadei GUI on linux:
 
-### only need to run 
+### only need to run.
 
-python3 main.py
+'python3 main.py'
 
 
 
