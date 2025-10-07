@@ -148,7 +148,7 @@ ApplicationWindow {
                 spacing: 30
 
                 RoundButton {
-                    text: "Option 1"
+                    text: "Google Maps \nRoad warning register"
                     size: 150
                 }
 
