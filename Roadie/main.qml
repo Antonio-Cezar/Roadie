@@ -111,12 +111,56 @@ ApplicationWindow {
             RoundButton {
                 text: "Register to \nservice"
                 size: parent.width
+                onClicked: regPopup.open()
             }
 
             RoundButton {
                 text: "Menu"
                 size: parent.width
                 onClicked: menuPopup.open()
+            }
+        }
+    }
+
+    // ================= POPUP Register =============
+    Popup {
+        id: regPopup
+        focus: true
+        x: (root.width - width) / 2
+        y: (root.height - height) / 2
+        width: 550
+        height: 250
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+
+        background: Rectangle {
+            anchors.fill: parent
+            color: "black"
+            radius: 10
+            border.color: "white"
+            border.width: 3
+        }
+
+        contentItem: Item {
+            anchors.fill: parent
+
+            Row {
+                anchors.centerIn: parent
+                spacing: 30
+
+                RoundButton {
+                    text: "Option 1"
+                    size: 150
+                }
+
+                RoundButton {
+                    text: "Option 2"
+                    size: 150
+                }
+
+                RoundButton {
+                    text: "Exit"
+                    size: 150
+                }
             }
         }
     }
