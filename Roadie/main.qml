@@ -270,7 +270,7 @@ ApplicationWindow {
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignHCenter
             font.bold: true
-            font.pixelSize: size * 0.10
+            font.pixelSize: size * 0.15
             color: "white"
         }
 
