@@ -133,8 +133,8 @@ ApplicationWindow {
     }
 
 
-    // ================= POPUP WIFI =================
-        Popup {
+    // ================= Wi-Fi POPUP =================
+    Popup {
         id: wifiPopup
         modal: true
         focus: true
@@ -143,6 +143,9 @@ ApplicationWindow {
         width: 640
         height: 380
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+
+        Component.onCompleted: wifi.scan()
+        onOpened: wifi.scan()
 
         background: Rectangle {
             anchors.fill: parent
@@ -157,77 +160,89 @@ ApplicationWindow {
             anchors.margins: 12
             spacing: 10
 
-            // Header with refresh + current status
-            // Header with refresh + disconnect + current status
-    Row {
-        width: parent.width
-        spacing: 10
+            // Header with status + Rescan + Disconnect
+            Row {
+                width: parent.width
+                spacing: 10
 
-        Text {
-            text: wifi.connected ? "Connected: " + wifi.connectedSsid : "Not connected"
-            color: "white"
-            font.bold: true
-            font.pixelSize: 18
-            elide: Text.ElideRight
-            width: parent.width - refreshBtn.implicitWidth - disconnectBtn.implicitWidth - 30
-        }
+                Text {
+                    text: wifi.connected ? "Connected: " + wifi.connectedSsid : "Not connected"
+                    color: "white"
+                    font.bold: true
+                    font.pixelSize: 18
+                    elide: Text.ElideRight
+                    width: parent.width - refreshBtn.implicitWidth - disconnectBtn.implicitWidth - 30
+                }
 
-        RectButton {
-            id: refreshBtn
-            text: "Rescan"
-            implicitWidth: 110
-            implicitHeight: 42
-            onClicked: wifi.scan()
-        }
+                RectButton {
+                    id: refreshBtn
+                    text: "Rescan"
+                    implicitWidth: 110
+                    implicitHeight: 42
+                    onClicked: wifi.scan()
+                }
 
-        RectButton {
-            id: disconnectBtn
-            text: "Disconnect"
-            implicitWidth: 130
-            implicitHeight: 42
-            enabled: wifi.connected
-            onClicked: {
-                if (wifi.connected) {
-                    wifi.disconnect(wifi.connectedSsid)
+                RectButton {
+                    id: disconnectBtn
+                    text: "Disconnect"
+                    implicitWidth: 130
+                    implicitHeight: 42
+                    enabled: wifi.connected
+                    onClicked: wifi.disconnect(wifi.connectedSsid)
                 }
             }
-        }
-    }
 
+            // Empty state (shows if no networks in model)
+            Item {
+                id: emptyState
+                width: parent.width
+                height: wifiList.visible ? 0 : 60
+                visible: !wifiList.visible
+                Text {
+                    anchors.centerIn: parent
+                    text: "No networks found. Tap Rescan."
+                    color: "white"
+                    font.pixelSize: 16
+                    opacity: 0.8
+                }
+            }
 
             // Networks list
             ListView {
-                id: list
+                id: wifiList
                 anchors.left: parent.left
                 anchors.right: parent.right
                 height: parent.height - 110
                 clip: true
                 spacing: 6
-                model: wifi.networks   // list<dict> from Python
+                model: wifi.networks
+                visible: (count > 0)
 
                 delegate: Rectangle {
-                    width: list.width
-                    height: 52
+                    width: wifiList.width
+                    height: 56
                     radius: 8
                     color: "transparent"
                     border.color: "white"
                     border.width: 1
+
+                    // Access Python dict fields through modelData
+                    property var n: modelData   // {ssid, rawSsid, locked, signal, security}
 
                     Row {
                         anchors.fill: parent
                         anchors.margins: 10
                         spacing: 10
 
-                        // SSID + lock icon
                         Text {
-                            text: (ssid.length ? ssid : "(hidden)") + (locked ? "  🔒" : "")
+                            text: ((n.ssid && n.ssid.length) ? n.ssid : "(hidden)") + (n.locked ? "  🔒" : "")
                             color: "white"
                             font.pixelSize: 16
                             elide: Text.ElideRight
-                            width: list.width * 0.55
+                            width: wifiList.width * 0.55
                         }
 
-                        // Signal bars
+                        // Simple signal meter (0–100 -> 0–5 bars)
                         Rectangle {
                             width: 100; height: 8; radius: 4
                             border.color: "white"; color: "transparent"
@@ -238,7 +253,7 @@ ApplicationWindow {
                                     delegate: Rectangle {
                                         width: (parent.width - 4*4)/5
                                         height: parent.height
-                                        color: index < Math.round(signal/20) ? "white" : "#555"
+                                        color: index < Math.round((n.signal || 0)/20) ? "white" : "#555"
                                         radius: 2
                                     }
                                 }
@@ -247,22 +262,21 @@ ApplicationWindow {
 
                         Item { width: 10; height: 1 }
 
-                        // Connect / Disconnect button
                         RectButton {
                             id: actionBtn
-                            text: wifi.connected && wifi.connectedSsid === ssid ? "Disconnect" : "Connect"
+                            text: (wifi.connected && wifi.connectedSsid === n.ssid) ? "Disconnect" : "Connect"
                             implicitWidth: 120
                             implicitHeight: 38
                             onClicked: {
-                                if (wifi.connected && wifi.connectedSsid === ssid) {
-                                    wifi.disconnect(ssid)
+                                if (wifi.connected && wifi.connectedSsid === n.ssid) {
+                                    wifi.disconnect(n.ssid)
                                 } else {
-                                    if (locked) {
-                                        passSsid.text = ssid
+                                    if (n.locked) {
+                                        passSsid.text = n.ssid && n.ssid.length ? n.ssid : n.rawSsid
                                         passField.text = ""
                                         passDialog.open()
                                     } else {
-                                        wifi.connect(ssid, "")
+                                        wifi.connect(n.ssid, "")
                                     }
                                 }
                             }
@@ -312,6 +326,7 @@ ApplicationWindow {
                 text: ""
                 color: "white"
                 font.pixelSize: 16
+                elide: Text.ElideRight
             }
             TextField {
                 id: passField
@@ -342,6 +357,7 @@ ApplicationWindow {
             }
         }
     }
+
 
 
     // ================= POPUP REGISTER =================
