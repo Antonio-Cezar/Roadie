@@ -2,6 +2,17 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 
+ApplicationWindow {
+    id: root
+    visible: true
+    width: 800
+    height: 480
+    visibility: Window.FullScreen
+
+    Overlay.modal: Rectangle {
+        color: "#80000000"    // dim background when Popup is open
+    }
+
 Window {
     id: root
     visible: true
@@ -277,4 +288,5 @@ Window {
             Text { text: value; color: "white"; font.pixelSize: 12 }
         }
     }
+}
 }
