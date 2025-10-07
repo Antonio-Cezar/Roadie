@@ -110,19 +110,33 @@ class WifiManager(QObject):
         self.refresh_status()
         self.scan()
 
+    def _wifi_iface(self):
+        # Find the wifi interface (e.g., wlan0)
+        rc, out, _ = _run('nmcli -t -f DEVICE,TYPE,STATE dev status')
+        if rc != 0:
+            return ""
+        for line in out.splitlines():
+            # DEV:TYPE:STATE  e.g. "wlan0:wifi:connected"
+            parts = line.split(':')
+            if len(parts) >= 3 and parts[1] == 'wifi':
+                return parts[0]
+        return ""
+
     @Slot(str)
     def disconnect(self, ssid):
-        # Try to bring down any connection profile with this SSID name
-        ssid_esc = ssid.replace('"', r'\"')
-        # First find exact connection names matching SSID
-        rc, out, _ = _run("nmcli -t -f NAME,TYPE connection show --active")
-        if rc == 0:
-            for line in out.splitlines():
-                name, ctype = (line.split(":") + [""])[:2]
-                if ctype == "wifi" and name == ssid:
-                    _run(f'nmcli connection down "{ssid_esc}"')
-        # As a fallback, disconnect wifi device
-        _run("nmcli radio wifi on")
-        self.message.emit(f"Disconnected {ssid}")
+        iface = self._wifi_iface()
+        if iface:
+            # This disconnects whatever Wi-Fi is active on that interface
+            _run(f'nmcli dev disconnect "{iface}"')
+        else:
+            # Fallback: bring down any active wifi connection profiles (name may not equal SSID)
+            rc, out, _ = _run('nmcli -t -f NAME,UUID,TYPE,DEVICE connection show --active')
+            if rc == 0:
+                for line in out.splitlines():
+                    name, uuid, ctype, dev = (line.split(':') + ["", "", "", ""])[:4]
+                    if ctype == 'wifi':
+                        _run(f'nmcli connection down "{uuid}"')
+        self.message.emit("Wi-Fi disconnected")
         self.refresh_status()
         self.scan()
+
