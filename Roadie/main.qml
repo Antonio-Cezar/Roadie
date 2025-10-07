@@ -127,27 +127,34 @@ ApplicationWindow {
             border.width: 3
         }
 
-        contentItem: Row {
-            anchors.centerIn: parent
-            spacing: 40
+        contentItem: Item {
+            anchors.fill: parent
 
-            RoundButton {
-                text: "Option 1"
-                size: 100
-                onClicked: console.log("Option 1 clicked")
-            }
-            RoundButton {
-                text: "Option 2"
-                size: 100
-                onClicked: console.log("Option 2 clicked")
-            }
-            RoundButton {
-                text: "Exit"
-                size: 100
-                onClicked: Qt.quit()
+            Row {
+                anchors.centerIn: parent
+                spacing: 40
+
+                RoundButton {
+                    text: "Option 1"
+                    size: 100
+                    onClicked: console.log("Option 1 clicked")
+                }
+
+                RoundButton {
+                    text: "Option 2"
+                    size: 100
+                    onClicked: console.log("Option 2 clicked")
+                }
+
+                RoundButton {
+                    text: "Exit"
+                    size: 100
+                    onClicked: menuPopup.close()
+                }
             }
         }
     }
+
 
     // ================= COMPONENTS =================
     component ForwardWarningPanel: Rectangle {
