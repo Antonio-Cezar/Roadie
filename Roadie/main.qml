@@ -162,11 +162,44 @@ ApplicationWindow {
                 RoundButton {
                     text: "Exit"
                     size: 150
-                    onClicked: Qt.quit()
+                    onClicked: confirmExit.open()
                 }
             }
         }
     }
+
+    Dialog {
+        id: confirmExit
+        modal: true
+        focus: true
+        x: (root.width - width) / 2
+        y: (root.height - height) / 2
+        width: 360
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+        title: "Confirm exit"
+
+        contentItem: Label {
+            text: "Are you sure you want to exit?"
+            wrapMode: Text.WordWrap
+            padding: 16
+            color: "white"
+        }
+
+        background: Rectangle {
+            anchors.fill: parent
+            color: "black"
+            radius: 10
+            border.color: "white"
+            border.width: 2
+        }
+
+        footer: DialogButtonBox {
+            standardButtons: DialogButtonBox.Yes | DialogButtonBox.No
+            onAccepted: Qt.quit()
+            onRejected: confirmExit.close()
+        }
+    }
+
 
 
     // ================= COMPONENTS =================
