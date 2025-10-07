@@ -4,6 +4,16 @@
 
 'python3 main.py'
 
+<div style="position: relative;">
+  <pre><code class="language-bash">npm install
+npm run dev</code></pre>
+  <button onclick="navigator.clipboard.writeText('npm install\nnpm run dev')" 
+          style="position:absolute;top:5px;right:5px;padding:4px 8px;border:none;border-radius:4px;background:#333;color:white;cursor:pointer;">
+    Copy
+  </button>
+</div>
+
+
 
 
 
