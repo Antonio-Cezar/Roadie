@@ -506,7 +506,7 @@ ApplicationWindow {
                 Video {
                     id: cam
                     anchors.fill: parent
-                    source: "tcp://raspberrypi.local:8888"   // <-- change to Pi IP if needed
+                    source: "rtsp://raspberrypi.local:8554/cam"   // <-- change to Pi IP if needed
                     autoPlay: true
                     fillMode: VideoOutput.PreserveAspectCrop
                 }
