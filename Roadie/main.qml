@@ -538,7 +538,7 @@ ApplicationWindow {
                 Text {
                     anchors.centerIn: parent
                     text: "Forward warning detection"
-                    font.pixelSize: 26
+                    font.pixelSize: 60
                     font.bold: true
                     color: "black"
                     horizontalAlignment: Text.AlignHCenter
