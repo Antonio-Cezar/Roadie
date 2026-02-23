@@ -16,7 +16,6 @@ dep_ready() {
 }
 
 while true; do
-  clear
 
   if dep_ready; then
     STATUS="READY"
@@ -31,7 +30,7 @@ while true; do
   echo "2) ..."
   echo "3) ..."
   echo "4) ..."
-  echo "5) Exit"
+  echo "x) Exit"
   echo
 
   read -r -p "Select an option [1-5]: " choice
@@ -45,7 +44,7 @@ while true; do
       ;;
     4)
       ;;
-    5)
+    x)
       exit 0
       ;;
     *)
