@@ -36,9 +36,13 @@ while true; do
   echo "=========================="
   echo "   RoadIe MENU  [$STATUS]"
   echo "=========================="
-  echo "1) Install dependecies (IF STATUS: NOT READY)"
+  echo ""
+  echo "---Dependencies---"
+  echo "1) Install dependencies (IF STATUS: NOT READY)"
   echo "2) Remove dependencies (IF SOMTHIN IS WRONG)"
-  echo "3) ..."
+  echo ""
+  echo "---RUN RoadIe---"
+  echo "3) RoadIe"
   echo "4) ..."
   echo "x) Exit"
   echo
@@ -47,14 +51,15 @@ while true; do
 
   case "$choice" in
     1)
-      chmod +x install_dependencies.sh
-      ./install_dependencies.sh
+    chmod +x install_dependencies.sh
+    ./install_dependencies.sh
       ;;
     2)
-        chmod +x remove_dependencies.sh
-      ./remove_dependencies.sh
+    chmod +x remove_dependencies.sh
+    ./remove_dependencies.sh
       ;;
     3)
+    ./RoadIe.sh
       ;;
     4)
       ;;
