@@ -502,45 +502,61 @@ ApplicationWindow {
             Item {
                 anchors.fill: parent
 
-                MediaDevices { id: mediaDevices }
-
-                Camera {
-                    id: camera
-                    cameraDevice: (mediaDevices.videoInputs.length > 0) ? mediaDevices.videoInputs[0] : null
-                    active: true
+                // Qt6 camera list
+                MediaDevices {
+                    id: mediaDevices
                 }
 
+                // Camera object (only activates if device exists)
+                Camera {
+                    id: camera
+                    active: mediaDevices.videoInputs.length > 0
+
+                    // IMPORTANT: only assign when camera exists
+                    Binding {
+                        target: camera
+                        property: "cameraDevice"
+                        value: mediaDevices.videoInputs[0]
+                        when: mediaDevices.videoInputs.length > 0
+                    }
+                }
+
+                // Connect camera → video output
                 CaptureSession {
                     camera: camera
                     videoOutput: viewfinder
                 }
 
+                // Live view
                 VideoOutput {
                     id: viewfinder
                     anchors.fill: parent
                     fillMode: VideoOutput.PreserveAspectCrop
                 }
 
+                // Dark overlay (for readability)
                 Rectangle {
                     anchors.fill: parent
                     color: "black"
                     opacity: 0.20
                 }
 
+                // If no camera detected
                 Text {
                     anchors.centerIn: parent
                     visible: mediaDevices.videoInputs.length === 0
                     text: "No camera detected"
-                    color: "white"
+                    color: "black"
                     font.pixelSize: 40
                 }
 
+                // Always visible title
                 Text {
                     anchors.centerIn: parent
                     text: "Forward warning detection"
-                    font.pixelSize: 60
+                    font.pixelSize: 26
                     font.bold: true
-                    color: "black"
+                    color: "white"
                     horizontalAlignment: Text.AlignHCenter
                 }
             }
