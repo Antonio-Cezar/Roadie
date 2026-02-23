@@ -1,23 +1,35 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PS3="Choose: "
+while true; do
+  clear
+  echo "=========================="
+  echo "       RoadIe MENU         "
+  echo "=========================="
+  echo "1) ..."
+  echo "2) ..."
+  echo "3) ..."
+  echo "4) ..."
+  echo "5) Exit"
+  echo
 
-options=(
-  "Scan Wi-Fi"
-  "Show active connection"
-  "Restart NetworkManager"
-  "Run my app"
-  "Exit"
-)
+  read -r -p "Select an option [1-5]: " choice
 
-select opt in "${options[@]}"; do
-  case "$REPLY" in
-    1) nmcli dev wifi rescan || true; nmcli dev wifi list | less ;;
-    2) nmcli -t -f ACTIVE,SSID dev wifi | grep '^yes' || echo "Not connected"; read -r ;;
-    3) sudo systemctl restart NetworkManager; echo "Restarted."; sleep 1 ;;
-    4) cd "$(dirname "$0")"; source .venv/bin/activate 2>/dev/null || true; python3 main.py ;;
-    5) exit 0 ;;
-    *) echo "Invalid choice";;
+  case "$choice" in
+    1)
+      ;;
+    2)
+      ;;
+    3)
+      ;;
+    4)
+      ;;
+    5)
+      exit 0
+      ;;
+    *)
+      echo "Invalid choice."
+      sleep 1
+      ;;
   esac
 done
