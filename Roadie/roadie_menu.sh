@@ -56,16 +56,20 @@ while true; do
     1)
     chmod +x install_dependencies.sh
     ./install_dependencies.sh
+    sleep 2
       ;;
     2)
     chmod +x remove_dependencies.sh
     ./remove_dependencies.sh
+    sleep 2
       ;;
     3)
     ./Roadie.sh
+    seep 2
       ;;
     4)
     git pull
+    sleep 2
       ;;
     x|X)
       exit 0
