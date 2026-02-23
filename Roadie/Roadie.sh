@@ -4,28 +4,43 @@ set -euo pipefail
 export QT_QUICK_BACKEND=software
 cd "$(dirname "$0")"
 
-# Start camera stream if libcamera-vid exists
-CAM_PID=""
+PI_HOST="pi@raspberrypi.local"
+RTSP_URL="rtsp://raspberrypi.local:8554/cam"
+
 cleanup() {
-  if [ -n "${CAM_PID:-}" ] && kill -0 "$CAM_PID" 2>/dev/null; then
-    kill "$CAM_PID" 2>/dev/null || true
-  fi
+  # Stop remote publisher (best effort)
+  ssh -o ConnectTimeout=2 "$PI_HOST" "pkill -f 'ffmpeg.*rtsp://127.0.0.1:8554/cam' || true" >/dev/null 2>&1 || true
 }
 trap cleanup EXIT INT TERM
 
-if command -v libcamera-vid >/dev/null 2>&1; then
-  # Only start if nothing is already listening on 8888
-  if ! ss -ltn 2>/dev/null | awk '{print $4}' | grep -qE '(:|\.)8888$'; then
-    echo "Starting camera stream on tcp://0.0.0.0:8888 ..."
-    libcamera-vid -t 0 --inline --listen -o tcp://0.0.0.0:8888 >/dev/null 2>&1 &
-    CAM_PID=$!
-    sleep 0.3
+echo "Ensuring RTSP stream is running on Pi: $RTSP_URL"
+
+# Start RTSP server on Pi (snap mediamtx) - best effort
+ssh -o ConnectTimeout=4 "$PI_HOST" '
+  set -e
+  command -v ffmpeg >/dev/null 2>&1 || sudo apt update && sudo apt install -y ffmpeg
+  if command -v mediamtx >/dev/null 2>&1; then
+    true
   else
-    echo "Camera stream already running on port 8888."
+    # try snap install (ignore if snap not available)
+    if command -v snap >/dev/null 2>&1; then
+      sudo snap install mediamtx || true
+    fi
   fi
-else
-  echo "libcamera-vid not found; skipping camera stream."
-fi
+  # start server if installed
+  if command -v mediamtx >/dev/null 2>&1; then
+    nohup mediamtx >/dev/null 2>&1 &
+  elif command -v snap >/dev/null 2>&1; then
+    sudo snap start mediamtx >/dev/null 2>&1 || true
+  fi
+
+  # start publisher if not running
+  if pgrep -f "rtsp://127.0.0.1:8554/cam" >/dev/null; then
+    exit 0
+  fi
+
+  nohup bash -lc "libcamera-vid -t 0 --inline --codec h264 -o - | ffmpeg -re -i - -c copy -f rtsp rtsp://127.0.0.1:8554/cam" >/dev/null 2>&1 &
+' >/dev/null || echo "Warning: could not start stream on Pi (check SSH/permissions)."
 
 # Run app from venv
 if [ -x ".venv/bin/python3" ]; then
