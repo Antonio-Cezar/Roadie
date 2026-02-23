@@ -56,7 +56,7 @@ while true; do
   case "$choice" in
     1)
     ./Roadie.sh
-    sleep 2
+    sleep 1
       ;;
     2)
     libcamera-hello
