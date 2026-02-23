@@ -59,7 +59,7 @@ while true; do
     ./remove_dependencies.sh
       ;;
     3)
-    ./RoadIe.sh
+    ./Roadie.sh
       ;;
     4)
       ;;
