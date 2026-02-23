@@ -540,7 +540,7 @@ ApplicationWindow {
                     text: "Forward warning detection"
                     font.pixelSize: 26
                     font.bold: true
-                    color: "white"
+                    color: "black"
                     horizontalAlignment: Text.AlignHCenter
                 }
             }
