@@ -43,7 +43,10 @@ while true; do
   echo ""
   echo "---RUN RoadIe---"
   echo "3) RoadIe"
-  echo "4) ..."
+  echo ""
+  echo "---Pull Update---"
+  echo "4) Update"
+  echo""
   echo "x) Exit"
   echo
 
@@ -62,6 +65,7 @@ while true; do
     ./Roadie.sh
       ;;
     4)
+    git pull
       ;;
     x|X)
       exit 0
