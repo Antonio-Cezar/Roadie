@@ -37,16 +37,17 @@ while true; do
   echo "   RoadIe MENU  [$STATUS]"
   echo "=========================="
   echo ""
-  echo "---Dependencies---"
-  echo "1) Install dependencies (IF STATUS: NOT READY)"
-  echo "2) Remove dependencies (IF SOMTHIN IS WRONG)"
-  echo ""
   echo "---RUN RoadIe---"
-  echo "3) RoadIe"
+  echo "1) RoadIe"
+  echo "2) Test CAMERA"
   echo ""
   echo "---Pull Update---"
-  echo "4) Update"
+  echo "3) Update"
   echo""
+  echo "---Dependencies---"
+  echo "4) Install dependencies (IF STATUS: NOT READY)"
+  echo "5) Remove dependencies (IF SOMTHIN IS WRONG)"
+  echo ""
   echo "x) Exit"
   echo
 
@@ -54,21 +55,25 @@ while true; do
 
   case "$choice" in
     1)
+    ./Roadie.sh
+    sleep 2
+      ;;
+    2)
+    libcamera-hello
+    sleep 2
+    ;;
+    3)
+    git pull
+    sleep 2
+      ;;
+    4)
     chmod +x install_dependencies.sh
     ./install_dependencies.sh
     sleep 2
       ;;
-    2)
+    5)
     chmod +x remove_dependencies.sh
     ./remove_dependencies.sh
-    sleep 2
-      ;;
-    3)
-    ./Roadie.sh
-    seep 2
-      ;;
-    4)
-    git pull
     sleep 2
       ;;
     x|X)
