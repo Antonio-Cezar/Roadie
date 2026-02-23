@@ -7,18 +7,24 @@ cd "$(dirname "$0")"
 # Stop any old bridge
 pkill -x libcamera-v4l2 2>/dev/null || true
 
-# Find libcamera-v4l2 binary
+# Find libcamera-v4l2 binary (must be an executable file)
 LIBCAM_V4L2="$(command -v libcamera-v4l2 || true)"
 if [ -z "$LIBCAM_V4L2" ]; then
-  LIBCAM_V4L2="$(dpkg -L libcamera-v4l2 2>/dev/null | grep -E '/libcamera-v4l2$' | head -n 1 || true)"
+  while IFS= read -r p; do
+    if [ -f "$p" ] && [ -x "$p" ]; then
+      LIBCAM_V4L2="$p"
+      break
+    fi
+  done < <(dpkg -L libcamera-v4l2 2>/dev/null | grep -E '/libcamera-v4l2$' || true)
 fi
 
-if [ -n "$LIBCAM_V4L2" ] && [ -x "$LIBCAM_V4L2" ]; then
+if [ -n "${LIBCAM_V4L2:-}" ] && [ -f "$LIBCAM_V4L2" ] && [ -x "$LIBCAM_V4L2" ]; then
   echo "Starting libcamera-v4l2 bridge: $LIBCAM_V4L2"
   "$LIBCAM_V4L2" --width 1280 --height 720 --framerate 30 > libcamera-v4l2.log 2>&1 &
   sleep 1
 else
-  echo "libcamera-v4l2 binary not found."
+  echo "libcamera-v4l2 executable not found."
+  echo "Try running: dpkg -L libcamera-v4l2 | grep v4l2"
 fi
 
 echo "Bridge running?"; pgrep -a libcamera-v4l2 || true
