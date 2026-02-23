@@ -15,8 +15,6 @@ dep_ready() {
   check_pip PySide6
 }
 
-pause() { read -r -p "Press Enter to continue..." _; }
-
 while true; do
   clear
 
@@ -26,9 +24,8 @@ while true; do
     STATUS="NOT READY"
   fi
 
-while true; do
   echo "=========================="
-  echo "       RoadIe MENU         "
+  echo "   RoadIe MENU  [$STATUS]"
   echo "=========================="
   echo "1) ..."
   echo "2) ..."
