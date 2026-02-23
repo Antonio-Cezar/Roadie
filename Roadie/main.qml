@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Window 2.15
+import QtMultimedia 5.15
 
 ApplicationWindow {
     id: root
@@ -499,12 +500,32 @@ ApplicationWindow {
         Component {
             id: idleCase
             Item {
+                anchors.fill: parent
+
+                // Live camera stream
+                Video {
+                    id: cam
+                    anchors.fill: parent
+                    source: "tcp://raspberrypi.local:8888"   // <-- change to Pi IP if needed
+                    autoPlay: true
+                    fillMode: VideoOutput.PreserveAspectCrop
+                }
+
+                // Slight dark overlay so white text pops
+                Rectangle {
+                    anchors.fill: parent
+                    color: "black"
+                    opacity: 0.20
+                }
+
+                // Your existing text on top
                 Text {
                     anchors.centerIn: parent
-                    text: "Forward warning detection \n(Disconnected)"
+                    text: "Forward warning detection \n(Connected)"
                     font.pixelSize: 26
                     font.bold: true
                     color: "white"
+                    horizontalAlignment: Text.AlignHCenter
                 }
             }
         }
