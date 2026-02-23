@@ -6,20 +6,25 @@ check_cmd() { command -v "$1" >/dev/null 2>&1; }
 check_pkg() { dpkg -s "$1" >/dev/null 2>&1; }
 check_pip() { python3 -c "import $1" >/dev/null 2>&1; }
 
-dep_status() {
-  PY=$(check_cmd python3 && echo "OK" || echo "MISSING")
-  PIP=$(check_cmd pip3 && echo "OK" || echo "MISSING")
-  VENV=$(check_pkg python3-venv && echo "OK" || echo "MISSING")
-
-  QT=$(check_pkg qt6-base-dev && echo "OK" || echo "MISSING")
-  QML=$(check_pkg qml6-module-qtquick && echo "OK" || echo "MISSING")
-
-  PYSIDE=$(check_pip PySide6 && echo "OK" || echo "MISSING")
-
-  echo "Deps: Python[$PY] Pip[$PIP] Venv[$VENV] Qt6[$QT] QML[$QML] PySide6[$PYSIDE]"
+dep_ready() {
+  check_cmd python3 &&
+  check_cmd pip3 &&
+  check_pkg python3-venv &&
+  check_pkg qt6-base-dev &&
+  check_pkg qml6-module-qtquick &&
+  check_pip PySide6
 }
 
 pause() { read -r -p "Press Enter to continue..." _; }
+
+while true; do
+  clear
+
+  if dep_ready; then
+    STATUS="READY"
+  else
+    STATUS="NOT READY"
+  fi
 
 while true; do
   echo "=========================="
