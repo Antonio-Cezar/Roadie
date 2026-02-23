@@ -37,6 +37,8 @@ while true; do
 
   case "$choice" in
     1)
+    chmod +x install_dependencies
+    ./install_dependencies
       ;;
     2)
       ;;

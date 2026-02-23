@@ -25,11 +25,20 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install PySide6
+deactivate || true
+
+echo "=== Making project scripts executable ==="
+chmod +x install_dependencies.sh 2>/dev/null || true
+chmod +x roadie_menu.sh 2>/dev/null || true
+chmod +x Roodiesh 2>/dev/null || true
 
 echo "=== Done! ==="
 echo
-echo "Run your app like this:"
-echo "  python3 main.py"
+echo "Run your menu:"
+echo "  ./roadie_menu.sh"
 echo
-echo "Optional: to test QML quickly, you can use (from qt6-declarative-dev-tools):"
-echo "  qml6scene yourfile.qml"
+echo "Run your app:"
+echo "  source .venv/bin/activate && python3 main.py"
+echo
+echo "Optional QML test:"
+echo "  qml6scene main.qml"
