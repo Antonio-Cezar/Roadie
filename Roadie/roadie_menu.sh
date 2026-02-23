@@ -26,14 +26,14 @@ while true; do
   echo "=========================="
   echo "   RoadIe MENU  [$STATUS]"
   echo "=========================="
-  echo "1) ..."
+  echo "1) Install dependecies (IF STATUS: NOT READY)"
   echo "2) ..."
   echo "3) ..."
   echo "4) ..."
   echo "x) Exit"
   echo
 
-  read -r -p "Select an option [1-5]: " choice
+  read -r -p "Select an option " choice
 
   case "$choice" in
     1)
