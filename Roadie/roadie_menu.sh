@@ -37,7 +37,7 @@ while true; do
   echo "   RoadIe MENU  [$STATUS]"
   echo "=========================="
   echo "1) Install dependecies (IF STATUS: NOT READY)"
-  echo "2) ..."
+  echo "2) Remove dependencies (IF SOMTHIN IS WRONG)"
   echo "3) ..."
   echo "4) ..."
   echo "x) Exit"
@@ -51,6 +51,8 @@ while true; do
       ./install_dependencies.sh
       ;;
     2)
+        chmod +x remove_dependencies.sh
+      ./remove_dependencies.sh
       ;;
     3)
       ;;
