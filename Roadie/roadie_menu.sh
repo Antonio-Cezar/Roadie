@@ -4,18 +4,28 @@ set -euo pipefail
 # -------- Dependency checks --------
 check_cmd() { command -v "$1" >/dev/null 2>&1; }
 check_pkg() { dpkg -s "$1" >/dev/null 2>&1; }
-check_pip() { python3 -c "import $1" >/dev/null 2>&1; }
+
+check_pyside() {
+  # Prefer venv python (since PySide6 is installed there)
+  if [ -x ".venv/bin/python3" ]; then
+    .venv/bin/python3 -c "import PySide6" >/dev/null 2>&1
+  elif [ -x ".venv/bin/python" ]; then
+    .venv/bin/python -c "import PySide6" >/dev/null 2>&1
+  else
+    return 1
+  fi
+}
 
 dep_ready() {
   check_cmd python3 &&
   check_cmd pip3 &&
   check_pkg python3-venv &&
-  check_pkg qt6-base-dev &&
-  check_pkg qml6-module-qtquick &&
-  check_pip PySide6
+  check_cmd nmcli &&
+  check_pyside
 }
 
 while true; do
+  clear
 
   if dep_ready; then
     STATUS="READY"
@@ -33,12 +43,12 @@ while true; do
   echo "x) Exit"
   echo
 
-  read -r -p "Select an option " choice
+  read -r -p "Select an option: " choice
 
   case "$choice" in
     1)
-    chmod +x install_dependencies.sh
-    ./install_dependencies.sh
+      chmod +x install_dependencies.sh
+      ./install_dependencies.sh
       ;;
     2)
       ;;
@@ -46,7 +56,7 @@ while true; do
       ;;
     4)
       ;;
-    x)
+    x|X)
       exit 0
       ;;
     *)
