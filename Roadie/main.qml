@@ -502,11 +502,11 @@ ApplicationWindow {
             Item {
                 anchors.fill: parent
 
+                MediaDevices { id: mediaDevices }
+
                 Camera {
                     id: camera
-                    cameraDevice: (QtMultimedia.availableCameras.length > 0)
-                                ? QtMultimedia.availableCameras[0]
-                                : null
+                    cameraDevice: (mediaDevices.videoInputs.length > 0) ? mediaDevices.videoInputs[0] : null
                     active: true
                 }
 
@@ -521,23 +521,20 @@ ApplicationWindow {
                     fillMode: VideoOutput.PreserveAspectCrop
                 }
 
-                // Show if Qt sees NO camera
-                Text {
-                    anchors.centerIn: parent
-                    visible: QtMultimedia.availableCameras.length === 0
-                    text: "No camera detected"
-                    color: "white"
-                    font.pixelSize: 60
-                }
-
-                // Slight dark overlay so white text pops
                 Rectangle {
                     anchors.fill: parent
                     color: "black"
                     opacity: 0.20
                 }
 
-                // Overlay title
+                Text {
+                    anchors.centerIn: parent
+                    visible: mediaDevices.videoInputs.length === 0
+                    text: "No camera detected"
+                    color: "white"
+                    font.pixelSize: 40
+                }
+
                 Text {
                     anchors.centerIn: parent
                     text: "Forward warning detection"
