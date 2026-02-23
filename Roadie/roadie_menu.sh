@@ -25,7 +25,6 @@ dep_ready() {
 }
 
 while true; do
-  clear
 
   if dep_ready; then
     STATUS="READY"
