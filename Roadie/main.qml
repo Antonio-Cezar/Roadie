@@ -527,7 +527,7 @@ ApplicationWindow {
                     visible: QtMultimedia.availableCameras.length === 0
                     text: "No camera detected"
                     color: "white"
-                    font.pixelSize: 18
+                    font.pixelSize: 30
                 }
 
                 // Slight dark overlay so white text pops
