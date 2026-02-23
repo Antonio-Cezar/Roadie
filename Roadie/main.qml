@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Window 2.15
-import QtMultimedia 5.15
+import QtMultimedia
 
 ApplicationWindow {
     id: root
@@ -172,7 +172,7 @@ ApplicationWindow {
                     font.bold: true
                     font.pixelSize: 18
                     elide: Text.ElideRight
-                    width: parent.width - refreshBtn.implicitWidth - disconnectBtn.implicitWidth - 30
+                    width: parent.width - refreshBtn.implicitWidth - 20
                 }
 
                 RectButton {
@@ -502,12 +502,20 @@ ApplicationWindow {
             Item {
                 anchors.fill: parent
 
-                // Live camera stream
-                Video {
-                    id: cam
+                Camera {
+                    id: camera
+                    // Optional: choose the default camera automatically
+                    active: true
+                }
+
+                CaptureSession {
+                    camera: camera
+                    videoOutput: viewfinder
+                }
+
+                VideoOutput {
+                    id: viewfinder
                     anchors.fill: parent
-                    source: "rtsp://raspberrypi.local:8554/cam"   // <-- change to Pi IP if needed
-                    autoPlay: true
                     fillMode: VideoOutput.PreserveAspectCrop
                 }
 
@@ -518,10 +526,10 @@ ApplicationWindow {
                     opacity: 0.20
                 }
 
-                // Your existing text on top
+                // Text overlay
                 Text {
                     anchors.centerIn: parent
-                    text: "Forward warning detection \n(Connected)"
+                    text: "Forward warning detection"
                     font.pixelSize: 26
                     font.bold: true
                     color: "white"
